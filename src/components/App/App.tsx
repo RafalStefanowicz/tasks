@@ -2,15 +2,13 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import { Nav } from "../Nav/Nav";
-import { Page } from "../Page/Page";
+import { TaskListContainer } from "../TaskLists/TaskListContainer/TaskListContainer";
 
-const App: React.FC = () => {
+export const App = (): JSX.Element => {
   return (
     <Router>
       <Nav />
-      <Page />
+      <TaskListContainer />
     </Router>
   );
 };
-
-export default App;
