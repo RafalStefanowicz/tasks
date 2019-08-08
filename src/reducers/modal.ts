@@ -1,27 +1,28 @@
 import { ActionTypes, Action } from "../types/ActionTypes";
 import { ModalTypes } from "../types/ModalTypes";
+import { ITask } from "./tasks";
 
 export const INITIAL_MODAL_STATE = {
   modalType: ModalTypes.initial,
   modalProps: {}
 };
 
-export interface ModalType {
+export interface IModal {
   modalType: ModalTypes;
-  modalProps: {
-    id?: number;
-  };
+  modalProps: any;
 }
 
 export const modal = (
-  state: ModalType = INITIAL_MODAL_STATE,
+  state: IModal = INITIAL_MODAL_STATE,
   action: Action
-): ModalType => {
+): IModal => {
   switch (action.type) {
     case ActionTypes.showModal:
       return action.payload;
+
     case ActionTypes.hideModal:
       return INITIAL_MODAL_STATE;
+
     default:
       return state;
   }

@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
-import { tasks, TaskType } from "./tasks";
-import { modal, ModalType } from "./modal";
+import { tasks, ITask } from "./tasks";
+import { modal, IModal } from "./modal";
 
 export interface StoreState {
-  tasks: TaskType[];
-  modal: ModalType;
+  tasks: ITask[];
+  modal: IModal;
 }
 
 export const reducers = combineReducers<StoreState>({ tasks, modal });

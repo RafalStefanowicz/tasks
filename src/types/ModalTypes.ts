@@ -1,4 +1,5 @@
 export enum ModalTypes {
   initial = "",
-  addTask = "addTask"
+  createTask = "CREATE_TASK",
+  deleteTask = "DELETE_TASK"
 }

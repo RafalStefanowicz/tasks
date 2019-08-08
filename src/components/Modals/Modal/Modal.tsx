@@ -14,12 +14,13 @@ StyledReactModal.setAppElement(rootElement);
 interface ModalProps {
   children: JSX.Element;
   hideModal: typeof hideModal;
-  acceptText: string;
+  heading: string;
+  confirmText: string;
   onSubmit: () => void;
 }
 
 const _Modal = (props: ModalProps): JSX.Element => {
-  const { hideModal, acceptText, children, onSubmit } = props;
+  const { heading, confirmText, children, hideModal, onSubmit } = props;
 
   const handleSubmit = (): void => {
     onSubmit();
@@ -28,9 +29,10 @@ const _Modal = (props: ModalProps): JSX.Element => {
 
   return (
     <StyledReactModal isOpen={true} onRequestClose={hideModal}>
+      <h1>{heading}</h1>
       {children}
       <button onClick={hideModal}>Cancel</button>
-      <button onClick={handleSubmit}>{acceptText}</button>
+      <button onClick={handleSubmit}>{confirmText}</button>
     </StyledReactModal>
   );
 };

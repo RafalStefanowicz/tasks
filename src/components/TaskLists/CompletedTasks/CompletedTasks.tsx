@@ -1,11 +1,17 @@
 import React from "react";
 
-import { TaskType } from "../../../reducers/tasks";
+import TaskList from "../TaskList";
+import { ITask } from "../../../reducers/tasks";
 
 interface CompletedTasksProps {
-  tasks: TaskType[];
+  tasks: ITask[];
 }
 
 export const CompletedTasks = (props: CompletedTasksProps) => {
-  return <>CompletedTasks</>;
+  return (
+    <>
+      <h1>Completed Tasks</h1>
+      <TaskList tasks={props.tasks} renderAction={id => <></>} />
+    </>
+  );
 };

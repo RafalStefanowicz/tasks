@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 
@@ -6,54 +6,35 @@ import { CompletedTasks } from "../CompletedTasks/CompletedTasks";
 import { IncompleteTasks } from "../IncompleteTasks/IncompleteTasks";
 import { addTasks } from "../../../actions/addTasks";
 import { StoreState } from "../../../reducers/reducers";
-import { dateIsToday } from "../../../helpers/helpers";
-import { TaskType } from "../../../reducers/tasks";
+import { divideTasks } from "../../../helpers/helpers";
+import { ITask } from "../../../reducers/tasks";
 import { RouteTypes } from "../../../types/RouteTypes";
 
-interface DividedTasksType {
-  completed: TaskType[];
-  today: TaskType[];
-  future: TaskType[];
-}
-
 interface TaskListContainerProps {
-  tasks: TaskType[];
+  tasks: ITask[];
   addTasks: typeof addTasks;
 }
 
 const _TaskListContainer = (props: TaskListContainerProps): JSX.Element => {
   const { tasks, addTasks } = props;
-
+  const isInitialMount = useRef(true);
   useEffect(() => {
-    const tasksString = localStorage.getItem("tasks");
-    if (tasksString) {
-      const tasksArray: TaskType[] = JSON.parse(tasksString);
-      if (Array.isArray(tasksArray)) {
-        addTasks(tasksArray);
-      }
+    const tasksJson = localStorage.getItem("tasks");
+    if (tasksJson) {
+      const tasks: ITask[] = JSON.parse(tasksJson);
+      addTasks(tasks);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
   }, [tasks]);
 
-  const dividedTasks: DividedTasksType = {
-    completed: [],
-    today: [],
-    future: []
-  };
-
-  tasks.forEach(task => {
-    if (task.completed) {
-      dividedTasks.completed.push(task);
-    } else if (dateIsToday(task.date)) {
-      dividedTasks.today.push(task);
-    } else {
-      dividedTasks.future.push(task);
-    }
-  });
-
+  const dividedTasks = divideTasks(tasks);
   return (
     <Switch>
       <Route
@@ -70,7 +51,7 @@ const _TaskListContainer = (props: TaskListContainerProps): JSX.Element => {
         )}
       />
       <Route
-        path={RouteTypes.future}
+        path={RouteTypes.past}
         render={(): JSX.Element => (
           <CompletedTasks tasks={dividedTasks.completed} />
         )}
@@ -79,7 +60,7 @@ const _TaskListContainer = (props: TaskListContainerProps): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: StoreState): { tasks: TaskType[] } => ({
+const mapStateToProps = (state: StoreState): { tasks: ITask[] } => ({
   tasks: state.tasks
 });
 

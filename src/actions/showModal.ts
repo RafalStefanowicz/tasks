@@ -1,16 +1,16 @@
 import { ActionTypes } from "../types/ActionTypes";
 
-import { ModalType } from "../reducers/modal";
+import { IModal } from "../reducers/modal";
 
 export interface ShowModalAction {
   type: ActionTypes.showModal;
-  payload: ModalType;
+  payload: IModal;
 }
 
 export const showModal = ({
   modalType,
   modalProps
-}: ModalType): ShowModalAction => ({
+}: IModal): ShowModalAction => ({
   type: ActionTypes.showModal,
   payload: { modalType, modalProps }
 });

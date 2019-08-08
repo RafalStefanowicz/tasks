@@ -1,31 +1,24 @@
+import uuid from "uuid";
+
 import { ActionTypes } from "../types/ActionTypes";
 import { PriorityTypes } from "../types/PriorityTypes";
-import { TaskType } from "../reducers/tasks";
-import { UniqueId } from "../helpers/helpers";
-
-const uniqueId = new UniqueId();
+import { ITask } from "../reducers/tasks";
 
 export interface AddTaskAction {
   type: ActionTypes.addTask;
-  payload: TaskType;
+  payload: ITask;
 }
 
-interface AddTaskArguments {
+export interface IAddTaskParams {
   description: string;
   priority: PriorityTypes;
   date: string;
 }
 
-export const addTask = ({
-  description,
-  priority,
-  date
-}: AddTaskArguments): AddTaskAction => {
+export const addTask = (taskProps: IAddTaskParams): AddTaskAction => {
   const newTask = {
-    description,
-    priority,
-    date,
-    id: uniqueId.getId(),
+    ...taskProps,
+    id: uuid(),
     completed: false
   };
 

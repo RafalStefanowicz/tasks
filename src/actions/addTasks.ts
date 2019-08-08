@@ -1,12 +1,12 @@
 import { ActionTypes } from "../types/ActionTypes";
-import { TaskType } from "../reducers/tasks";
+import { ITask } from "../reducers/tasks";
 
 export interface AddTasksAction {
   type: ActionTypes.addTasks;
-  payload: TaskType[];
+  payload: ITask[];
 }
 
-export const addTasks = (tasks: TaskType[]): AddTasksAction => ({
+export const addTasks = (tasks: ITask[]): AddTasksAction => ({
   type: ActionTypes.addTasks,
   payload: tasks
 });

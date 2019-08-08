@@ -6,11 +6,11 @@ import { RouteTypes } from "../../types/RouteTypes";
 
 export const Nav = (): JSX.Element => {
   return (
-    <div>
+    <nav>
       <NavLink to={RouteTypes.today}>Today</NavLink>
       <NavLink to={RouteTypes.future}>Future</NavLink>
       <NavLink to={RouteTypes.past}>History</NavLink>
       <AddTaskBtn />
-    </div>
+    </nav>
   );
 };

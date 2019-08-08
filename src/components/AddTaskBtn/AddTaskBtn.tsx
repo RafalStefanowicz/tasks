@@ -11,8 +11,8 @@ interface AddTaskBtnProps {
 const _AddTaskBtn = (props: AddTaskBtnProps): JSX.Element => {
   const handleClick = () => {
     props.showModal({
-      modalType: ModalTypes.addTask,
-      modalProps: {}
+      modalType: ModalTypes.createTask,
+      modalProps: null
     });
   };
 
