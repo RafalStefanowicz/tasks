@@ -12,7 +12,7 @@ const _AddTaskBtn = (props: AddTaskBtnProps): JSX.Element => {
   const handleClick = () => {
     props.showModal({
       modalType: ModalTypes.createTask,
-      modalProps: null
+      modalProps: {}
     });
   };
 

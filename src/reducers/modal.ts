@@ -1,6 +1,5 @@
 import { ActionTypes, Action } from "../types/ActionTypes";
 import { ModalTypes } from "../types/ModalTypes";
-import { ITask } from "./tasks";
 
 export const INITIAL_MODAL_STATE = {
   modalType: ModalTypes.initial,
