@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { StyledReactModal } from "./ModalStyle";
-import { hideModal } from "../../../actions/hideModal";
+import { hideModal } from "../../../actions";
 
 const rootElement = document.getElementById("root");
 if (rootElement === null) {
@@ -11,7 +11,7 @@ if (rootElement === null) {
 
 StyledReactModal.setAppElement(rootElement);
 
-interface ModalProps {
+interface IModalProps {
   children: JSX.Element;
   hideModal: typeof hideModal;
   heading: string;
@@ -19,7 +19,7 @@ interface ModalProps {
   onSubmit: () => void;
 }
 
-const _Modal = (props: ModalProps): JSX.Element => {
+const _Modal = (props: IModalProps): JSX.Element => {
   const { heading, confirmText, children, hideModal, onSubmit } = props;
 
   const handleSubmit = (): void => {

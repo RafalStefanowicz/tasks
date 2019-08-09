@@ -1,9 +1,9 @@
 import { ActionTypes } from "../types/ActionTypes";
 
-export interface HideModalAction {
+export interface IHideModalAction {
   type: ActionTypes.hideModal;
 }
 
-export const hideModal = (): HideModalAction => ({
+export const hideModal = (): IHideModalAction => ({
   type: ActionTypes.hideModal
 });

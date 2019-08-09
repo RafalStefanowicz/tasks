@@ -1,14 +1,14 @@
-import { AddTaskAction } from "../actions/addTask";
-import { AddTasksAction } from "../actions/addTasks";
-import { ShowModalAction } from "../actions/showModal";
-import { HideModalAction } from "../actions/hideModal";
-import { ICompleteTask } from "../actions/completeTask";
+import { IAddTasksAction } from "../actions/addTasks";
+import { IAddTaskAction } from "../actions/addTask";
 import { IEditTaskAction } from "../actions/editTask";
+import { IShowModalAction } from "../actions/showModal";
+import { IHideModalAction } from "../actions/hideModal";
+import { ICompleteTask } from "../actions/completeTask";
 import { IDeleteTaskAction } from "../actions/deleteTask";
 
 export enum ActionTypes {
-  addTask = "ADD_TASK",
   addTasks = "ADD_TASKS",
+  addTask = "ADD_TASK",
   editTask = "EDIT_TASK",
   deleteTask = "DELETE_TASK",
   completeTask = "COMPLETE_TASK",
@@ -17,10 +17,10 @@ export enum ActionTypes {
 }
 
 export type Action =
-  | AddTaskAction
-  | AddTasksAction
-  | ICompleteTask
+  | IAddTasksAction
+  | IAddTaskAction
   | IEditTaskAction
   | IDeleteTaskAction
-  | ShowModalAction
-  | HideModalAction;
+  | ICompleteTask
+  | IShowModalAction
+  | IHideModalAction;

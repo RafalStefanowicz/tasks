@@ -1,8 +1,5 @@
 import { ITask } from "../reducers/tasks";
 import { IDividedTasks } from "../types/Interfaces";
-import { PriorityTypes } from "../types/PriorityTypes";
-import { IAddTaskParams } from "../actions/addTask";
-import { IEditTaskParams } from "../actions/editTask";
 
 export const getDate = (): string => {
   const date = new Date();
@@ -41,16 +38,4 @@ export const divideTasks = (tasks: ITask[]): IDividedTasks => {
   });
 
   return dividedTasks;
-};
-
-export const getCreateTaskInitState = (
-  editTask: IEditTaskParams | undefined
-): IAddTaskParams => {
-  const initialState = {
-    description: editTask ? editTask.description : "",
-    priority: editTask ? editTask.priority : PriorityTypes.low,
-    date: editTask ? editTask.date : getDate()
-  };
-
-  return initialState;
 };

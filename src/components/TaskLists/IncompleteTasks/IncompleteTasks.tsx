@@ -7,13 +7,13 @@ import { completeTask } from "../../../actions/completeTask";
 import { showModal } from "../../../actions/showModal";
 import { ModalTypes } from "../../../types/ModalTypes";
 
-interface IncompleteTasksProps {
+interface IIncompleteTasksProps {
   tasks: ITask[];
   completeTask: typeof completeTask;
   showModal: typeof showModal;
 }
 
-const _IncompleteTasks = (props: IncompleteTasksProps): JSX.Element => {
+const _IncompleteTasks = (props: IIncompleteTasksProps): JSX.Element => {
   const { tasks, completeTask, showModal } = props;
 
   const renderDelete = (task: ITask) => {

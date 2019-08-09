@@ -5,17 +5,17 @@ import { Switch, Route } from "react-router-dom";
 import { CompletedTasks } from "../CompletedTasks/CompletedTasks";
 import { IncompleteTasks } from "../IncompleteTasks/IncompleteTasks";
 import { addTasks } from "../../../actions/addTasks";
-import { StoreState } from "../../../reducers/reducers";
+import { IStoreState } from "../../../reducers/reducers";
 import { divideTasks } from "../../../helpers/helpers";
 import { ITask } from "../../../reducers/tasks";
 import { RouteTypes } from "../../../types/RouteTypes";
 
-interface TaskListContainerProps {
+interface ITaskListContainerProps {
   tasks: ITask[];
   addTasks: typeof addTasks;
 }
 
-const _TaskListContainer = (props: TaskListContainerProps): JSX.Element => {
+const _TaskListContainer = (props: ITaskListContainerProps): JSX.Element => {
   const { tasks, addTasks } = props;
   const isInitialMount = useRef(true);
   useEffect(() => {
@@ -60,7 +60,7 @@ const _TaskListContainer = (props: TaskListContainerProps): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: StoreState): { tasks: ITask[] } => ({
+const mapStateToProps = (state: IStoreState): { tasks: ITask[] } => ({
   tasks: state.tasks
 });
 

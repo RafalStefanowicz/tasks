@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { Modal } from "../Modal/Modal";
 
-import { deleteTask } from "../../../actions/deleteTask";
+import { deleteTask } from "../../../actions";
 import { ITask } from "../../../reducers/tasks";
 
 interface IDeleteTaskModal {

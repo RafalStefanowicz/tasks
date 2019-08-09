@@ -3,7 +3,7 @@ import React from "react";
 import { PriorityTypes } from "../../types/PriorityTypes";
 import { getDate } from "../../helpers/helpers";
 
-interface TaskFormProps {
+interface ITaskFormProps {
   taskInput: string;
   handleTaskTextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   priority: PriorityTypes;
@@ -12,7 +12,7 @@ interface TaskFormProps {
   handleDateChange: (e: React.ChangeEvent<HTMLDataElement>) => void;
 }
 
-export const TaskForm = (props: TaskFormProps) => {
+export const TaskForm = (props: ITaskFormProps) => {
   const {
     taskInput,
     handleTaskTextChange,

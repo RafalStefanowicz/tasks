@@ -1,52 +1,50 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import uuid from "uuid";
 
 import { Modal } from "../Modal/Modal";
 import { TaskForm } from "../../TaskForm/TaskForm";
-import { addTask } from "../../../actions/addTask";
-import { editTask } from "../../../actions/editTask";
-import { getCreateTaskInitState, getDate } from "../../../helpers/helpers";
+import { addTask, editTask } from "../../../actions";
+import { getDate } from "../../../helpers/helpers";
 import { ITask } from "../../../reducers/tasks";
 import { PriorityTypes } from "../../../types/PriorityTypes";
 
-interface CreateTaskModalProps {
-  task?: ITask;
+interface ICreateTaskModalProps {
+  task: ITask;
   addTask: typeof addTask;
   editTask: typeof editTask;
 }
 
 const defaultProps = {
   task: {
+    id: "",
     description: "",
+    date: getDate(),
     priority: PriorityTypes.low,
-    date: getDate()
+    completed: false
   }
 };
 
-const _CreateTaskModal: React.FC<CreateTaskModalProps> = ({
+const _CreateTaskModal = ({
   task,
   addTask,
   editTask
-}) => {
-  const init = getCreateTaskInitState(task);
+}: ICreateTaskModalProps) => {
+  const [taskInput, setTaskInput] = useState<string>(task.description);
+  const [priority, setPriority] = useState<PriorityTypes>(task.priority);
+  const [date, setDate] = useState<string>(task.date);
 
-  const [taskInput, setTaskInput] = useState<string>(init.description);
-  const [priority, setPriority] = useState<PriorityTypes>(init.priority);
-  const [date, setDate] = useState<string>(init.date);
+  const isEdit = !!task.id;
 
   const onSubmit = (): void => {
-    task
-      ? editTask({
-          id: task.id,
-          description: taskInput,
-          priority: priority,
-          date: date
-        })
-      : addTask({
-          description: taskInput,
-          priority: priority,
-          date: date
-        });
+    const newTask = {
+      id: task.id || uuid(),
+      description: taskInput,
+      date: date,
+      priority: priority,
+      completed: task.completed
+    };
+    isEdit ? editTask(newTask) : addTask(newTask);
   };
 
   const handleTaskTextChange = (
@@ -67,8 +65,8 @@ const _CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
   return (
     <Modal
-      heading={task ? "Edit Task" : "Create Task"}
-      confirmText="Create"
+      heading={isEdit ? "Edit Task" : "Create Task"}
+      confirmText={isEdit ? "Edit" : "Create"}
       onSubmit={onSubmit}
     >
       <TaskForm
@@ -83,7 +81,7 @@ const _CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   );
 };
 
-// _CreateTaskModal.defaultProps = defaultProps;
+_CreateTaskModal.defaultProps = defaultProps;
 
 export const CreateTaskModal = connect(
   null,

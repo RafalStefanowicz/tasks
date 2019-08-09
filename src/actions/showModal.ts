@@ -2,7 +2,7 @@ import { ActionTypes } from "../types/ActionTypes";
 
 import { IModal } from "../reducers/modal";
 
-export interface ShowModalAction {
+export interface IShowModalAction {
   type: ActionTypes.showModal;
   payload: IModal;
 }
@@ -10,7 +10,7 @@ export interface ShowModalAction {
 export const showModal = ({
   modalType,
   modalProps
-}: IModal): ShowModalAction => ({
+}: IModal): IShowModalAction => ({
   type: ActionTypes.showModal,
   payload: { modalType, modalProps }
 });

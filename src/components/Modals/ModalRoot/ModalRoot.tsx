@@ -5,13 +5,13 @@ import { CreateTaskModal } from "../CreateTaskModal/CreateTaskModal";
 import { DeleteTaskModal } from "../DeleteTaskModal/DeleteTaskModal";
 import { IModal } from "../../../reducers/modal";
 import { ModalTypes } from "../../../types/ModalTypes";
-import { StoreState } from "../../../reducers/reducers";
+import { IStoreState } from "../../../reducers/reducers";
 
-interface ModalRootProps {
+interface IModalRootProps {
   modal: IModal;
 }
 
-export const _ModalRoot = ({ modal }: ModalRootProps): JSX.Element | null => {
+export const _ModalRoot = ({ modal }: IModalRootProps): JSX.Element | null => {
   const { modalType, modalProps } = modal;
 
   switch (modalType) {
@@ -25,7 +25,7 @@ export const _ModalRoot = ({ modal }: ModalRootProps): JSX.Element | null => {
   return null;
 };
 
-const mapStateToProps = (state: StoreState): { modal: IModal } => ({
+const mapStateToProps = (state: IStoreState): { modal: IModal } => ({
   modal: state.modal
 });
 

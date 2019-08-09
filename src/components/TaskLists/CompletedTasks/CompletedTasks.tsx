@@ -3,11 +3,11 @@ import React from "react";
 import TaskList from "../TaskList";
 import { ITask } from "../../../reducers/tasks";
 
-interface CompletedTasksProps {
+interface ICompletedTasksProps {
   tasks: ITask[];
 }
 
-export const CompletedTasks = (props: CompletedTasksProps) => {
+export const CompletedTasks = (props: ICompletedTasksProps) => {
   return (
     <>
       <h1>Completed Tasks</h1>
