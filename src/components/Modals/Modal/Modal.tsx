@@ -17,25 +17,39 @@ interface IModalProps {
   heading: string;
   confirmText: string;
   onSubmit: () => void;
+  isDisabled?: boolean;
 }
 
 const _Modal = (props: IModalProps): JSX.Element => {
-  const { heading, confirmText, children, hideModal, onSubmit } = props;
+  const {
+    heading,
+    confirmText,
+    isDisabled,
+    children,
+    hideModal,
+    onSubmit
+  } = props;
 
   const handleSubmit = (): void => {
     onSubmit();
     hideModal();
   };
 
+  console.log(isDisabled);
+
   return (
     <StyledReactModal isOpen={true} onRequestClose={hideModal}>
       <h1>{heading}</h1>
       {children}
       <button onClick={hideModal}>Cancel</button>
-      <button onClick={handleSubmit}>{confirmText}</button>
+      <button onClick={handleSubmit} disabled={isDisabled}>
+        {confirmText}
+      </button>
     </StyledReactModal>
   );
 };
+
+_Modal.defaultProps = { isDisabled: false };
 
 export const Modal = connect(
   null,

@@ -35,6 +35,7 @@ const _CreateTaskModal = ({
   const [date, setDate] = useState<string>(task.date);
 
   const isEdit = !!task.id;
+  let isInvalid = !taskInput.length;
 
   const onSubmit = (): void => {
     const newTask = {
@@ -44,8 +45,6 @@ const _CreateTaskModal = ({
       priority: priority,
       completed: task.completed
     };
-    
-
     isEdit ? editTask(newTask) : addTask(newTask);
   };
 
@@ -70,6 +69,7 @@ const _CreateTaskModal = ({
       heading={isEdit ? "Edit Task" : "Create Task"}
       confirmText={isEdit ? "Edit" : "Create"}
       onSubmit={onSubmit}
+      isDisabled={isInvalid}
     >
       <TaskForm
         taskInput={taskInput}

@@ -1,7 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
+import { faTrash, faEdit, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import TaskList from "../TaskList";
+import { ActionBtn } from "../../ActionBtn/ActionBtn";
+import { CompleteBtn } from "../../CompleteBtn/CompleteBtn";
+import { EditBtn } from "../../EditBtn/EditBtn";
 import { ITask } from "../../../reducers/tasks";
 import { completeTask } from "../../../actions/completeTask";
 import { showModal } from "../../../actions/showModal";
@@ -17,40 +21,32 @@ const _IncompleteTasks = (props: IIncompleteTasksProps): JSX.Element => {
   const { tasks, completeTask, showModal } = props;
 
   const renderDelete = (task: ITask) => {
-    return (
-      <button
-        onClick={() => {
-          showModal({
-            modalType: ModalTypes.deleteTask,
-            modalProps: { task: task }
-          });
-        }}
-      >
-        Delete
-      </button>
-    );
+    const handleDelete = () => {
+      showModal({
+        modalType: ModalTypes.deleteTask,
+        modalProps: { task: task }
+      });
+    };
+
+    return <ActionBtn handleAction={handleDelete} icon={faTrash} />;
   };
 
   const renderAction = (task: ITask) => {
+    const handleShowModal = () => {
+      showModal({
+        modalType: ModalTypes.createTask,
+        modalProps: { task }
+      });
+    };
+
+    const handleComplete = () => {
+      completeTask(task.id);
+    };
+
     return (
       <>
-        <button
-          onClick={() => {
-            completeTask(task.id);
-          }}
-        >
-          Completed
-        </button>
-        <button
-          onClick={() => {
-            showModal({
-              modalType: ModalTypes.createTask,
-              modalProps: { task }
-            });
-          }}
-        >
-          Edit
-        </button>
+        <ActionBtn handleAction={handleShowModal} icon={faEdit} />
+        <ActionBtn handleAction={handleComplete} icon={faCheck} />
       </>
     );
   };

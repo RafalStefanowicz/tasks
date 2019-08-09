@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Priority } from "../Priority/Priority";
 import { ITask } from "../../reducers/tasks";
 
 interface ITaskList {
@@ -15,7 +16,10 @@ const TaskList: React.FC<ITaskList> = (props): JSX.Element => {
     return (
       <li key={task.id}>
         <span>{task.date}</span>
-        <span>{`${task.priority} - zmien na gwiazdki`}</span>
+        <span>
+          <Priority priority={task.priority} />
+        </span>
+
         <div>
           {renderDelete && renderDelete(task)}
           <span>{task.description}</span>
