@@ -44,6 +44,8 @@ const _CreateTaskModal = ({
       priority: priority,
       completed: task.completed
     };
+    
+
     isEdit ? editTask(newTask) : addTask(newTask);
   };
 

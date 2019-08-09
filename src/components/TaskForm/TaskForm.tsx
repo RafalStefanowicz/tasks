@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import { PriorityTypes } from "../../types/PriorityTypes";
 import { getDate } from "../../helpers/helpers";
@@ -25,13 +27,13 @@ export const TaskForm = (props: ITaskFormProps) => {
   return (
     <div>
       <label>
+        <span>Date</span>
         <input
           type="date"
           onChange={handleDateChange}
           value={date}
           min={getDate()}
         />
-        <span>Date</span>
       </label>
       <label>
         <input
@@ -41,7 +43,9 @@ export const TaskForm = (props: ITaskFormProps) => {
           checked={PriorityTypes.low === priority}
           onChange={handlePriorityChange}
         />
-        <span>{PriorityTypes.low}</span>
+        <span>
+          <FontAwesomeIcon icon={faStar} />
+        </span>
       </label>
       <label>
         <input
@@ -51,7 +55,10 @@ export const TaskForm = (props: ITaskFormProps) => {
           checked={PriorityTypes.medium === priority}
           onChange={handlePriorityChange}
         />
-        <span>{PriorityTypes.medium}</span>
+        <span>
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+        </span>
       </label>
       <label>
         <input
@@ -61,7 +68,11 @@ export const TaskForm = (props: ITaskFormProps) => {
           checked={PriorityTypes.high === priority}
           onChange={handlePriorityChange}
         />
-        <span>{PriorityTypes.high}</span>
+        <span>
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+        </span>
       </label>
       <textarea value={taskInput} onChange={handleTaskTextChange} />
     </div>
