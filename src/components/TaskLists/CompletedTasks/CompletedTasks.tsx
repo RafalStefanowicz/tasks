@@ -1,6 +1,6 @@
 import React from "react";
 
-import TaskList from "../TaskList";
+import TaskList from "../TaskList/TaskList";
 import { ITask } from "../../../reducers/tasks";
 
 interface ICompletedTasksProps {

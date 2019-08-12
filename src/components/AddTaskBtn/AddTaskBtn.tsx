@@ -18,13 +18,8 @@ const _AddTaskBtn = (props: IAddTaskBtnProps): JSX.Element => {
     });
   };
 
-  return (
-    <span>
-      <ActionBtn icon={faPlusCircle} handleAction={handleAdd} />
-    </span>
-  );
+  return <ActionBtn icon={faPlusCircle} handleAction={handleAdd} big={true} />;
 };
-
 export const AddTaskBtn = connect(
   null,
   { showModal }

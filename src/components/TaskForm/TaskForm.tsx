@@ -2,7 +2,14 @@ import React from "react";
 import { Priority } from "../Priority/Priority";
 
 import { PriorityTypes } from "../../types/PriorityTypes";
-import { getDate } from "../../helpers/helpers";
+import { getDateInputFormat } from "../../helpers/helpers";
+import {
+  StyledRadioWrapper,
+  StyledRadio,
+  StyledRadioLabel,
+  StyledDate,
+  StyledTextArea
+} from "./taskFormStyle";
 
 interface ITaskFormProps {
   taskInput: string;
@@ -24,52 +31,48 @@ export const TaskForm = (props: ITaskFormProps) => {
   } = props;
 
   return (
-    <div>
-      <label>
-        <input
-          type="date"
-          onChange={handleDateChange}
-          value={date}
-          min={getDate()}
-        />
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="priority"
-          value={PriorityTypes.low}
-          checked={PriorityTypes.low === priority}
-          onChange={handlePriorityChange}
-        />
-        <span>
+    <>
+      <StyledRadioWrapper>
+        <StyledRadioLabel>
+          <StyledRadio
+            type="radio"
+            name="priority"
+            value={PriorityTypes.low}
+            checked={PriorityTypes.low === priority}
+            onChange={handlePriorityChange}
+          />
           <Priority priority={PriorityTypes.low} />
-        </span>
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="priority"
-          value={PriorityTypes.medium}
-          checked={PriorityTypes.medium === priority}
-          onChange={handlePriorityChange}
-        />
-        <span>
+        </StyledRadioLabel>
+        <StyledRadioLabel>
+          <StyledRadio
+            type="radio"
+            name="priority"
+            value={PriorityTypes.medium}
+            checked={PriorityTypes.medium === priority}
+            onChange={handlePriorityChange}
+          />
           <Priority priority={PriorityTypes.medium} />
-        </span>
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="priority"
-          value={PriorityTypes.high}
-          checked={PriorityTypes.high === priority}
-          onChange={handlePriorityChange}
-        />
-        <span>
+        </StyledRadioLabel>
+        <StyledRadioLabel>
+          <StyledRadio
+            type="radio"
+            name="priority"
+            value={PriorityTypes.high}
+            checked={PriorityTypes.high === priority}
+            onChange={handlePriorityChange}
+          />
           <Priority priority={PriorityTypes.high} />
-        </span>
-      </label>
-      <textarea value={taskInput} onChange={handleTaskTextChange} />
-    </div>
+        </StyledRadioLabel>
+      </StyledRadioWrapper>
+
+      <StyledDate
+        type="date"
+        onChange={handleDateChange}
+        value={date}
+        min={getDateInputFormat()}
+      />
+
+      <StyledTextArea value={taskInput} onChange={handleTaskTextChange} />
+    </>
   );
 };

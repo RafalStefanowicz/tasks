@@ -6,7 +6,7 @@ import { Action } from "../types/ActionTypes";
 export interface ITask {
   id: string;
   description: string;
-  date: string;
+  date: Date;
   priority: PriorityTypes;
   completed: boolean;
 }

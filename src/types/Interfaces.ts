@@ -5,3 +5,7 @@ export interface IDividedTasks {
   today: ITask[];
   future: ITask[];
 }
+
+export interface IRenderTasksContainerProps {
+  filter?: string;
+}

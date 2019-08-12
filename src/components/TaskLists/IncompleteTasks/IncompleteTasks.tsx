@@ -1,11 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { faTrash, faEdit, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
-import TaskList from "../TaskList";
+import TaskList from "../TaskList/TaskList";
 import { ActionBtn } from "../../ActionBtn/ActionBtn";
-import { CompleteBtn } from "../../CompleteBtn/CompleteBtn";
-import { EditBtn } from "../../EditBtn/EditBtn";
 import { ITask } from "../../../reducers/tasks";
 import { completeTask } from "../../../actions/completeTask";
 import { showModal } from "../../../actions/showModal";
@@ -31,31 +30,29 @@ const _IncompleteTasks = (props: IIncompleteTasksProps): JSX.Element => {
     return <ActionBtn handleAction={handleDelete} icon={faTrash} />;
   };
 
-  const renderAction = (task: ITask) => {
+  const renderEdit = (task: ITask) => {
     const handleShowModal = () => {
       showModal({
         modalType: ModalTypes.createTask,
         modalProps: { task }
       });
     };
+    return <ActionBtn handleAction={handleShowModal} icon={faEdit} />;
+  };
 
+  const renderComplete = (task: ITask) => {
     const handleComplete = () => {
       completeTask(task.id);
     };
-
-    return (
-      <>
-        <ActionBtn handleAction={handleShowModal} icon={faEdit} />
-        <ActionBtn handleAction={handleComplete} icon={faCheck} />
-      </>
-    );
+    return <ActionBtn handleAction={handleComplete} icon={faCheck} />;
   };
 
   return (
     <TaskList
       tasks={tasks}
       renderDelete={renderDelete}
-      renderAction={renderAction}
+      renderEdit={renderEdit}
+      renderComplete={renderComplete}
     />
   );
 };

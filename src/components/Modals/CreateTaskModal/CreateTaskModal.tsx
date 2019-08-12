@@ -5,7 +5,7 @@ import uuid from "uuid";
 import { Modal } from "../Modal/Modal";
 import { TaskForm } from "../../TaskForm/TaskForm";
 import { addTask, editTask } from "../../../actions";
-import { getDate } from "../../../helpers/helpers";
+import { getDateInputFormat, isValidLength } from "../../../helpers/helpers";
 import { ITask } from "../../../reducers/tasks";
 import { PriorityTypes } from "../../../types/PriorityTypes";
 
@@ -19,7 +19,7 @@ const defaultProps = {
   task: {
     id: "",
     description: "",
-    date: getDate(),
+    date: new Date(),
     priority: PriorityTypes.low,
     completed: false
   }
@@ -30,28 +30,33 @@ const _CreateTaskModal = ({
   addTask,
   editTask
 }: ICreateTaskModalProps) => {
+  const initDate = getDateInputFormat(task.date);
   const [taskInput, setTaskInput] = useState<string>(task.description);
   const [priority, setPriority] = useState<PriorityTypes>(task.priority);
-  const [date, setDate] = useState<string>(task.date);
+  const [date, setDate] = useState<string>(initDate);
 
-  const isEdit = !!task.id;
-  let isInvalid = !taskInput.length;
+  const isEditTask = !!task.id;
+  let isInvalidForm = !taskInput.length;
 
   const onSubmit = (): void => {
     const newTask = {
       id: task.id || uuid(),
       description: taskInput,
-      date: date,
+      date: new Date(date),
       priority: priority,
       completed: task.completed
     };
-    isEdit ? editTask(newTask) : addTask(newTask);
+
+    isEditTask ? editTask(newTask) : addTask(newTask);
   };
 
   const handleTaskTextChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ): void => {
-    setTaskInput(e.currentTarget.value);
+    const inputValue = e.currentTarget.value;
+
+    if (!isValidLength(inputValue)) return alert("Maximum length of the word");
+    setTaskInput(inputValue);
   };
 
   const handlePriorityChange = (
@@ -66,10 +71,10 @@ const _CreateTaskModal = ({
 
   return (
     <Modal
-      heading={isEdit ? "Edit Task" : "Create Task"}
-      confirmText={isEdit ? "Edit" : "Create"}
+      heading={isEditTask ? "Edit Task" : "Create Task"}
+      confirmText={isEditTask ? "Edit" : "Create"}
       onSubmit={onSubmit}
-      isDisabled={isInvalid}
+      isDisabled={isInvalidForm}
     >
       <TaskForm
         taskInput={taskInput}

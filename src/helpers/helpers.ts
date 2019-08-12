@@ -1,11 +1,32 @@
 import { ITask } from "../reducers/tasks";
 import { IDividedTasks } from "../types/Interfaces";
 
-export const getDate = (): string => {
-  const date = new Date();
+export const divideTasks = (tasks: ITask[]): IDividedTasks => {
+  const dividedTasks: IDividedTasks = {
+    completed: [],
+    today: [],
+    future: []
+  };
+
+  tasks.forEach(task => {
+    const today = new Date();
+    const taskDate = new Date(task.date);
+    if (task.completed) {
+      dividedTasks.completed.push(task);
+    } else if (taskDate <= today) {
+      dividedTasks.today.push(task);
+    } else {
+      dividedTasks.future.push(task);
+    }
+  });
+
+  return dividedTasks;
+};
+
+export const getDateInputFormat = (date: Date = new Date()): string => {
   const year = date.getFullYear();
-  let month: number | string = date.getMonth() + 1;
-  let day: number | string = date.getDate();
+  let month: string | number = date.getMonth() + 1;
+  let day: string | number = date.getDate();
 
   if (month < 10) {
     month = "0" + month;
@@ -18,24 +39,43 @@ export const getDate = (): string => {
   return `${year}-${month}-${day}`;
 };
 
-export const dateIsToday = (date: string): boolean => date === getDate();
+export const getTaskLC = (): ITask[] => {
+  const tasksJson = localStorage.getItem("tasks");
+  let tasks: ITask[] = [];
+  if (tasksJson) {
+    tasks = JSON.parse(tasksJson);
+    tasks.forEach(task => {
+      task.date = new Date(task.date);
+    });
+  }
+  return tasks;
+};
 
-export const divideTasks = (tasks: ITask[]): IDividedTasks => {
-  const dividedTasks: IDividedTasks = {
-    completed: [],
-    today: [],
-    future: []
-  };
-
-  tasks.forEach(task => {
-    if (task.completed) {
-      dividedTasks.completed.push(task);
-    } else if (dateIsToday(task.date)) {
-      dividedTasks.today.push(task);
-    } else {
-      dividedTasks.future.push(task);
+export const sortTasks = (tasks: ITask[]): ITask[] => {
+  // i dont want to mutate the old array
+  const sortedTasks = [...tasks];
+  sortedTasks.sort(
+    (a: ITask, b: ITask): number => {
+      const aDate = a.date.getTime();
+      const bDate = b.date.getTime();
+      return aDate - bDate;
     }
+  );
+  return sortedTasks;
+};
+
+export const filterTasks = (tasks: ITask[], condition: string) =>
+  tasks.filter((task: ITask) => {
+    const description = task.description.toLocaleLowerCase();
+    return description.includes(condition.toLowerCase());
   });
 
-  return dividedTasks;
+export const isValidLength = (description: string): boolean => {
+  const words = description.split(" ");
+  for (let i = 0; i < words.length; i++) {
+    if (words[i].length >= 18) return false;
+  }
+  return true;
 };
+
+// skróć treść zadania
