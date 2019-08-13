@@ -6,6 +6,7 @@ export const StyledWrapper = styled.div`
 `;
 
 export const StyledMain = styled.main`
+  margin-top: 95px;
   @media (max-width: 768px) {
     margin-top: 64px;
   }
