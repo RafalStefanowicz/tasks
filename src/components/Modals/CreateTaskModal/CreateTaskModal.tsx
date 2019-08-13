@@ -54,8 +54,8 @@ const _CreateTaskModal = ({
     e: React.ChangeEvent<HTMLTextAreaElement>
   ): void => {
     const inputValue = e.currentTarget.value;
-
     if (!isValidLength(inputValue)) return alert("Maximum length of the word");
+
     setTaskInput(inputValue);
   };
 

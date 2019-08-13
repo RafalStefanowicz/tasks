@@ -14,13 +14,13 @@ const _DeleteTaskModal = (props: IDeleteTaskModal): JSX.Element => {
   const { deleteTask, task } = props;
   return (
     <Modal
-      heading="Do you want to delete post.."
+      heading="Do you want to delete task?"
       confirmText="Delete"
       onSubmit={() => {
         deleteTask(task.id);
       }}
     >
-      <h1>{` ${task.description}`}</h1>
+      <p>{` ${task.description}`}</p>
     </Modal>
   );
 };

@@ -3,19 +3,14 @@ import React from "react";
 import { AddTaskBtn } from "../AddTaskBtn/AddTaskBtn";
 import { NavLink } from "react-router-dom";
 import { RouteTypes } from "../../types/RouteTypes";
-import {
-  StyledLinksWrapper,
-  StyledAddBtnWrapper,
-  StyledWrapper,
-  StyledLabel
-} from "./navStyle";
+import { StyledLinksWrapper, StyledWrapper, StyledLabel } from "./navStyle";
 
 export const Nav = (): JSX.Element => {
   return (
     <nav>
       <StyledWrapper>
         <StyledLinksWrapper>
-          <NavLink to={RouteTypes.today}>
+          <NavLink to={RouteTypes.today} exact>
             <StyledLabel>Today</StyledLabel>
           </NavLink>
           <NavLink to={RouteTypes.future}>
@@ -25,9 +20,7 @@ export const Nav = (): JSX.Element => {
             <StyledLabel>History</StyledLabel>
           </NavLink>
         </StyledLinksWrapper>
-        <StyledAddBtnWrapper>
-          <AddTaskBtn />
-        </StyledAddBtnWrapper>
+        <AddTaskBtn />
       </StyledWrapper>
     </nav>
   );

@@ -5,4 +5,8 @@ export const StyledWrapper = styled.div`
   margin: 0 auto;
 `;
 
-export const StyledMain = styled.main``;
+export const StyledMain = styled.main`
+  @media (max-width: 768px) {
+    margin-top: 64px;
+  }
+`;

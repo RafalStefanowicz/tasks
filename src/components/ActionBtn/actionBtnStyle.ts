@@ -7,6 +7,10 @@ interface IStyledIconWrapper {
 
 export const StyledBtn = styled.button`
   border: none;
+  outline: 0;
+  :hover {
+    color: #2e93e8;
+  }
 `;
 
 export const StyledIconWrapper = styled.span<IStyledIconWrapper>`

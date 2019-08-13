@@ -23,12 +23,12 @@ interface ITaskListContainerProps {
 
 const _TaskListContainer = (props: ITaskListContainerProps): JSX.Element => {
   const { tasks, addTasks } = props;
-
   const isInitialMount = useRef(true);
+
   useEffect(() => {
-    const tasks = getTaskLC();
-    addTasks(tasks);
-  }, []);
+    const tasksLC = getTaskLC();
+    addTasks(tasksLC);
+  }, [addTasks]);
 
   useEffect(() => {
     if (isInitialMount.current) {

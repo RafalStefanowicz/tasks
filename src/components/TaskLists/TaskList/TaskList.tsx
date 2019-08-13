@@ -3,7 +3,6 @@ import React from "react";
 import { Priority } from "../../Priority/Priority";
 import { ITask } from "../../../reducers/tasks";
 import {
-  StyledList,
   StyledItem,
   StyledTrashAndDescriptionWrapper,
   StyledIconWrapper,
@@ -39,7 +38,7 @@ const TaskList: React.FC<ITaskList> = (props): JSX.Element => {
             {renderDelete && renderDelete(task)}
             <StyledDescription>{task.description}</StyledDescription>
           </StyledTrashAndDescriptionWrapper>
-          <StyledIconWrapper visible={!!renderEdit}>
+          <StyledIconWrapper>
             {renderEdit && renderEdit(task)}
             {renderComplete && renderComplete(task)}
           </StyledIconWrapper>
@@ -48,7 +47,7 @@ const TaskList: React.FC<ITaskList> = (props): JSX.Element => {
     );
   });
 
-  return <StyledList>{tasksJSX}</StyledList>;
+  return <ul>{tasksJSX}</ul>;
 };
 
 export default TaskList;

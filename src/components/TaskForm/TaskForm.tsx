@@ -8,7 +8,8 @@ import {
   StyledRadio,
   StyledRadioLabel,
   StyledDate,
-  StyledTextArea
+  StyledTextArea,
+  StyledRadioGroup
 } from "./taskFormStyle";
 
 interface ITaskFormProps {
@@ -33,36 +34,46 @@ export const TaskForm = (props: ITaskFormProps) => {
   return (
     <>
       <StyledRadioWrapper>
-        <StyledRadioLabel>
+        <StyledRadioGroup>
           <StyledRadio
             type="radio"
             name="priority"
+            id={PriorityTypes.low}
             value={PriorityTypes.low}
             checked={PriorityTypes.low === priority}
             onChange={handlePriorityChange}
           />
-          <Priority priority={PriorityTypes.low} />
-        </StyledRadioLabel>
-        <StyledRadioLabel>
+          <StyledRadioLabel htmlFor={PriorityTypes.low}>
+            <Priority priority={PriorityTypes.low} />
+          </StyledRadioLabel>
+        </StyledRadioGroup>
+        <StyledRadioGroup>
           <StyledRadio
             type="radio"
             name="priority"
+            id={PriorityTypes.medium}
             value={PriorityTypes.medium}
             checked={PriorityTypes.medium === priority}
             onChange={handlePriorityChange}
           />
-          <Priority priority={PriorityTypes.medium} />
-        </StyledRadioLabel>
-        <StyledRadioLabel>
+          <StyledRadioLabel htmlFor={PriorityTypes.medium}>
+            <Priority priority={PriorityTypes.medium} />
+          </StyledRadioLabel>
+        </StyledRadioGroup>
+
+        <StyledRadioGroup>
           <StyledRadio
             type="radio"
             name="priority"
+            id={PriorityTypes.high}
             value={PriorityTypes.high}
             checked={PriorityTypes.high === priority}
             onChange={handlePriorityChange}
           />
-          <Priority priority={PriorityTypes.high} />
-        </StyledRadioLabel>
+          <StyledRadioLabel htmlFor={PriorityTypes.high}>
+            <Priority priority={PriorityTypes.high} />
+          </StyledRadioLabel>
+        </StyledRadioGroup>
       </StyledRadioWrapper>
 
       <StyledDate

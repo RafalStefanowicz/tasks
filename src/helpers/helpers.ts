@@ -71,7 +71,7 @@ export const filterTasks = (tasks: ITask[], condition: string) =>
   });
 
 export const isValidLength = (description: string): boolean => {
-  const words = description.split(" ");
+  const words = description.split(/\s+/);
   for (let i = 0; i < words.length; i++) {
     if (words[i].length >= 18) return false;
   }

@@ -1,7 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { StyledReactModal, StyledHeading, StyledButton } from "./ModalStyle";
+import {
+  StyledReactModal,
+  StyledReactModalWrapper,
+  StyledHeading,
+  StyledButton,
+  StyledButtonWrapper
+} from "./modalStyle";
 import { hideModal } from "../../../actions";
 
 const rootElement = document.getElementById("root");
@@ -37,14 +43,16 @@ const _Modal = (props: IModalProps): JSX.Element => {
 
   return (
     <StyledReactModal isOpen={true} onRequestClose={hideModal}>
-      <StyledHeading>{heading}</StyledHeading>
-      {children}
-      <StyledButtonWrapper>
-        <StyledButton onClick={hideModal}>Cancel</StyledButton>
-        <StyledButton onClick={handleSubmit} disabled={isDisabled}>
-          {confirmText}
-        </StyledButton>
-      </StyledButtonWrapper>
+      <StyledReactModalWrapper>
+        <StyledHeading>{heading}</StyledHeading>
+        {children}
+        <StyledButtonWrapper>
+          <StyledButton onClick={hideModal}>Cancel</StyledButton>
+          <StyledButton onClick={handleSubmit} disabled={isDisabled}>
+            {confirmText}
+          </StyledButton>
+        </StyledButtonWrapper>
+      </StyledReactModalWrapper>
     </StyledReactModal>
   );
 };

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledRadio = styled.input`
-  /* display: none; */
+  display: none;
 `;
 
 export const StyledRadioLabel = styled.label`
@@ -11,21 +11,34 @@ export const StyledRadioLabel = styled.label`
 `;
 
 export const StyledRadioWrapper = styled.div`
-  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 `;
 
 export const StyledDate = styled.input`
-  border: 1px solid black;
+  width: 50%;
+  border: 2px solid black;
   margin: 10px;
   padding: 5px 15px;
-  width: 100%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const StyledTextArea = styled.textarea`
-  width: 100%;
-  border: 1px solid black;
+  width: 80%;
+  border: 2px solid black;
   height: 150px;
   padding: 10px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const StyledRadioGroup = styled.div`
+  margin: 10px;
+  ${StyledRadio}:checked + ${StyledRadioLabel} svg {
+    color: #2e93e8;
+  }
 `;
