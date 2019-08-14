@@ -38,8 +38,9 @@ const _TaskListContainer = (props: ITaskListContainerProps): JSX.Element => {
     }
   }, [tasks]);
 
-  const dividedTasks = divideTasks(tasks);
-
+  const sortedTasks = sortTasks([...tasks]);
+  const dividedTasks = divideTasks(sortedTasks);
+  if (!tasks.length) return <></>;
   return (
     <>
       <Switch>
@@ -53,7 +54,9 @@ const _TaskListContainer = (props: ITaskListContainerProps): JSX.Element => {
         <Route
           path={RouteTypes.future}
           render={(): JSX.Element => (
-            <IncompleteTasks tasks={dividedTasks.future} />
+            <span>
+              <IncompleteTasks tasks={dividedTasks.future} />
+            </span>
           )}
         />
         <Route
@@ -71,9 +74,8 @@ const mapStateToProps = (
   state: IStoreState,
   { filter }: IRenderTasksContainerProps
 ): { tasks: ITask[] } => {
-  const sortedTasks = sortTasks(state.tasks);
-  if (!filter) return { tasks: sortedTasks };
-  const filteredTasks = filterTasks(sortedTasks, filter);
+  if (!filter) return { tasks: state.tasks };
+  const filteredTasks = filterTasks(state.tasks, filter);
   return {
     tasks: filteredTasks
   };

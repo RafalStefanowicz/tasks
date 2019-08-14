@@ -1,5 +1,5 @@
 import React from "react";
-import { CSSTransition } from "react-transition-group";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { Priority } from "../../Priority/Priority";
 import { ITask } from "../../../reducers/tasks";
@@ -26,7 +26,7 @@ const TaskList: React.FC<ITaskList> = (props): JSX.Element => {
 
   const tasksJSX = tasks.map(task => {
     return (
-      <CSSTransition timeout={5000}>
+      <CSSTransition timeout={300} key={task.id} classNames="task-item">
         <StyledItem key={task.id}>
           <StyledDateWrapper>
             {task.date.toLocaleDateString()}
@@ -34,7 +34,6 @@ const TaskList: React.FC<ITaskList> = (props): JSX.Element => {
               <Priority priority={task.priority} />
             </StyledPriorityWrapper>
           </StyledDateWrapper>
-
           <StyledTaskWrapper>
             <StyledTrashAndDescriptionWrapper>
               {renderDelete && renderDelete(task)}
@@ -50,7 +49,11 @@ const TaskList: React.FC<ITaskList> = (props): JSX.Element => {
     );
   });
 
-  return <ul>{tasksJSX}</ul>;
+  return (
+    <ul>
+      <TransitionGroup>{tasksJSX}</TransitionGroup>
+    </ul>
+  );
 };
 
 export default TaskList;

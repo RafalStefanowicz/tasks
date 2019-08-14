@@ -13,7 +13,6 @@ export const Filter = ({ renderChildren }: IFilterProps): JSX.Element => {
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFilter(e.currentTarget.value);
   };
-
   return (
     <>
       <FilterInput filter={filter} handleFilterChange={handleFilterChange} />

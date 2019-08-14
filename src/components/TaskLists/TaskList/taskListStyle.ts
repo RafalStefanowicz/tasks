@@ -4,6 +4,21 @@ export const StyledItem = styled.li`
   border: solid black 2px;
   margin-bottom: 10px;
   padding: 15px;
+  transition: opacity linear 300ms;
+
+  &.task-item-enter {
+    opacity: 0;
+  }
+  &.task-item-enter-active {
+    opacity: 1;
+  }
+  &.task-item-exit {
+    opacity: 1;
+  }
+  &.task-item-exit-active {
+    opacity: 0;
+  }
+
   @media (max-width: 768px) {
     padding: 10px;
   }

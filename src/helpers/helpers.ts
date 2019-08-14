@@ -52,16 +52,14 @@ export const getTaskLC = (): ITask[] => {
 };
 
 export const sortTasks = (tasks: ITask[]): ITask[] => {
-  // i dont want to mutate the old array
-  const sortedTasks = [...tasks];
-  sortedTasks.sort(
+  tasks.sort(
     (a: ITask, b: ITask): number => {
       const aDate = a.date.getTime();
       const bDate = b.date.getTime();
       return aDate - bDate;
     }
   );
-  return sortedTasks;
+  return tasks;
 };
 
 export const filterTasks = (tasks: ITask[], condition: string) =>
