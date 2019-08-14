@@ -30,7 +30,7 @@ body {
   font-size: 25px;
 
   @media (max-width: 768px) {
-    font-size:16px;
+    font-size: 16px;
   }
 }
 
@@ -38,6 +38,4 @@ input, textarea, button {
   font-family: inherit;
   font-size: inherit;
 }
-
-
 `;
