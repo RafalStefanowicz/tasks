@@ -1,41 +1,41 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
-* {
-  margin: 0;
-  padding:0;
-  box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+  * {
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
 
-  a {
-    text-decoration: none;
-    color: #000;
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    li {
+      list-style-type: none;
+    }  
+
+    button {
+      background-color: white;
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
   }
 
-  li {
-    list-style-type: none;
-  }  
+  body {
+    font-family: 'Lato', sans-serif;
+    font-size: 25px;
 
-  button {
-    background-color: white;
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
   }
 
-  button:hover {
-    cursor: pointer;
+  input, textarea, button {
+    font-family: inherit;
+    font-size: inherit;
   }
-}
-
-body {
-  @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
-  font-family: 'Lato', sans-serif;
-  font-size: 25px;
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
-}
-
-input, textarea, button {
-  font-family: inherit;
-  font-size: inherit;
-}
 `;

@@ -10,7 +10,6 @@ interface ICompletedTasksProps {
 export const CompletedTasks = ({ tasks }: ICompletedTasksProps) => {
   return (
     <>
-      <h1>Completed Tasks</h1>
       <TaskList tasks={tasks} renderAction={id => <></>} />
     </>
   );
