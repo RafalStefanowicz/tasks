@@ -9,9 +9,9 @@ import { App } from "./components/App/App";
 
 ReactDOM.render(
   <>
-    <GlobalStyle />
     <Provider store={store}>
       <ModalRoot />
+      <GlobalStyle />
       <App />
     </Provider>
   </>,
