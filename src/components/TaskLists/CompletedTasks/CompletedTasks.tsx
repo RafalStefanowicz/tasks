@@ -7,11 +7,11 @@ interface ICompletedTasksProps {
   tasks: ITask[];
 }
 
-export const CompletedTasks = (props: ICompletedTasksProps) => {
+export const CompletedTasks = ({ tasks }: ICompletedTasksProps) => {
   return (
     <>
       <h1>Completed Tasks</h1>
-      <TaskList tasks={props.tasks} renderAction={id => <></>} />
+      <TaskList tasks={tasks} renderAction={id => <></>} />
     </>
   );
 };
