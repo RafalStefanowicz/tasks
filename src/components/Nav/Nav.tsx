@@ -10,7 +10,7 @@ export const Nav = (): JSX.Element => {
     <StyledNav>
       <StyledLinksWrapper>
         <NavLink to={RouteTypes.today} exact>
-          <StyledLabel>Today</StyledLabel>
+          <StyledLabel>Now</StyledLabel>
         </NavLink>
         <NavLink to={RouteTypes.future}>
           <StyledLabel>Future</StyledLabel>
