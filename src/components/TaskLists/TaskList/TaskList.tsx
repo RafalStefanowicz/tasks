@@ -26,7 +26,11 @@ const TaskList: React.FC<ITaskList> = (props): JSX.Element => {
 
   const tasksJSX = tasks.map(task => {
     return (
-      <CSSTransition timeout={300} key={task.id} classNames="task-item">
+      <CSSTransition
+        timeout={{ exit: 300, enter: 1000 }}
+        key={task.id}
+        classNames="task-item"
+      >
         <StyledItem key={task.id}>
           <StyledDateWrapper>
             {task.date.toLocaleDateString()}

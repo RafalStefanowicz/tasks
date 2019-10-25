@@ -14,15 +14,15 @@ import {
 } from "../../../helpers/helpers";
 import { ITask } from "../../../reducers/tasks";
 import { RouteTypes } from "../../../types/RouteTypes";
-import { IRenderTasksContainerProps } from "../../../types/Interfaces";
 
 interface ITaskListContainerProps {
   tasks: ITask[];
   addTasks: typeof addTasks;
+  filter: string;
 }
 
 const _TaskListContainer = (props: ITaskListContainerProps): JSX.Element => {
-  const { tasks, addTasks } = props;
+  const { tasks, addTasks, filter } = props;
   const isInitialMount = useRef(true);
 
   useEffect(() => {
@@ -38,8 +38,10 @@ const _TaskListContainer = (props: ITaskListContainerProps): JSX.Element => {
     }
   }, [tasks]);
 
-  const sortedTasks = sortTasks([...tasks]);
+  const filteredTasks = filterTasks(tasks, filter);
+  const sortedTasks = sortTasks(filteredTasks);
   const dividedTasks = divideTasks(sortedTasks);
+
   if (!tasks.length) return <></>;
   return (
     <>
@@ -70,16 +72,9 @@ const _TaskListContainer = (props: ITaskListContainerProps): JSX.Element => {
   );
 };
 
-const mapStateToProps = (
-  state: IStoreState,
-  { filter }: IRenderTasksContainerProps
-): { tasks: ITask[] } => {
-  if (!filter) return { tasks: state.tasks };
-  const filteredTasks = filterTasks(state.tasks, filter);
-  return {
-    tasks: filteredTasks
-  };
-};
+const mapStateToProps = (state: IStoreState): { tasks: ITask[] } => ({
+  tasks: state.tasks
+});
 
 export const TaskListContainer = connect(
   mapStateToProps,

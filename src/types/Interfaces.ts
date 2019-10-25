@@ -7,5 +7,5 @@ export interface IDividedTasks {
 }
 
 export interface IRenderTasksContainerProps {
-  filter?: string;
+  filter: string;
 }

@@ -7,6 +7,7 @@ export const StyledItem = styled.li`
   transition: opacity linear 300ms;
 
   &.task-item-enter {
+    transition: opacity linear 1000ms;
     opacity: 0;
   }
   &.task-item-enter-active {
